@@ -1,8 +1,8 @@
 const express = require('express')
 const { MongoClient } = require('mongodb')
 
-const dbUrl = 'mongodb+srv://admin:daw23j1mlkso67jsdf01le@cluster0.ffwvg9l.mongodb.net'
-const dbName = 'mongodb-intro-e-implementacao'
+const dbUrl = 'mongodb+srv://admin:gc3uuPLwGRF89uqY@cluster0.h2ofpob.mongodb.net'
+const dbName = 'Database-intro'
 
 // Declaramos a função main()
 async function main() {
@@ -22,11 +22,14 @@ async function main() {
   })
 
   const lista = ['Java', 'Kotlin', 'Android']
-  //             0        1         2
 
   // Endpoint Read All [GET] /personagem
-  app.get('/personagem', function (req, res) {
-    res.send(lista.filter(Boolean))
+  app.get('/personagem', async function (req, res) {
+    // Acessamos a lista de itens na collection do MongoDB
+    const itens = await collection.find().toArray()
+
+    // Enviamos a lista de itens como resultado
+    res.send(itens)
   })
 
   // Endpoint Read By ID [GET] /personagem/:id
